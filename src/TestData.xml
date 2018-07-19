@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <environment>
     <URL>http://blog.yoniflenner.net/bmi</URL>
-    <Weight>147</Weight>
-    <Hight>216</Hight>
+    <Weight>120</Weight>
+    <Hight>175</Hight>
     <ExpectedResultBMI>32</ExpectedResultBMI>
     <ExpectedResultMean>That you have overweight.</ExpectedResultMean>
 </environment>

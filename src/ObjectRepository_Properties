@@ -1,0 +1,3 @@
+demo.login.username = "//input[@name='username']"
+demo.login.password = "//input[@name='password']")
+demo.login.submit = "submit"

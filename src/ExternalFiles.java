@@ -41,7 +41,7 @@ public class ExternalFiles
 	public void setData() throws ParserConfigurationException, SAXException, IOException
 	{	
 		driver.findElement(By.id("weight")).sendKeys(getData("Weight"));
-    	driver.findElement(By.name("height")).sendKeys(getData("Hight"));
+    	driver.findElement(By.id("hight")).sendKeys(getData("Hight"));
     	driver.findElement(By.id("calculate_data")).click(); 
     	wait.until(ExpectedConditions.textToBePresentInElementValue(By.id("bmi_means"), "That"));
     	
@@ -53,6 +53,7 @@ public class ExternalFiles
 	@AfterClass
 	public static void closeBrowser()
 	{
+
 		driver.quit();
 	}
 	

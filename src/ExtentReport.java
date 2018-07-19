@@ -1,4 +1,7 @@
+import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -20,50 +23,56 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
+
 @FixMethodOrder(MethodSorters.JVM)
 
 
-public class ExtentReports
-{
+public class ExtentReport {
     private static WebDriver driver;
     WebDriverWait wait = new WebDriverWait(driver, 10);
-    public static ExtentReports extent;
-    public static ExtentTest test;
+
 
     @BeforeClass
-    public static void openBrowser() throws ParserConfigurationException, SAXException, IOException
-    {
+    public static void openBrowser() throws ParserConfigurationException, SAXException, IOException {
         System.setProperty("webdriver.chrome.driver", "/Users/oshikzigler/Documents/Automation/Selenium/Drivers/Chrome/chromedriver");
         driver = new ChromeDriver();
         driver.manage().window().fullscreen();
         driver.get(getData("URL"));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        //extent = new ExtentReports("/Users/oshikzigler/Documents/Automation/Selenium/Extent Reports/TestRunReport.html");
-
     }
 
     @Test
-    public void setData() throws ParserConfigurationException, SAXException, IOException
-    {
+    public void setData() throws ParserConfigurationException, SAXException, IOException {
+
+        ExtentHtmlReporter reporter = new ExtentHtmlReporter("/Users/oshikzigler/Documents/Automation/Selenium/Extent_Reports/TestRunReports/Report2.html");
+        ExtentReports extent = new ExtentReports();
+        extent.attachReporter(reporter);
+        ExtentTest logger = extent.createTest("SetData" , "Inserting data to BMI calculator");
+
+
+        extent.flush();
+
+
+
         driver.findElement(By.id("weight")).sendKeys(getData("Weight"));
         driver.findElement(By.name("height")).sendKeys(getData("Hight"));
         driver.findElement(By.id("calculate_data")).click();
         wait.until(ExpectedConditions.textToBePresentInElementValue(By.id("bmi_means"), "That"));
 
         String ActualResult = driver.findElement(By.id("bmi_result")).getAttribute("value");
-        assertEquals(getData("ExpectedResultBMI"),ActualResult);
-        assertEquals(getData("ExpectedResultMean"),driver.findElement(By.id("bmi_means")).getAttribute("value"));
+        assertEquals(getData("ExpectedResultBMI"), ActualResult);
+        assertEquals(getData("ExpectedResultMean"), driver.findElement(By.id("bmi_means")).getAttribute("value"));
+        logger.log(Status.INFO , "Inserting data");
+        logger.log(Status.PASS , "Valid values");
 
     }
 
     @AfterClass
-    public static void closeBrowser()
-    {
+    public static void closeBrowser() {
         driver.quit();
     }
 
-    public static String getData (String nodeName) throws ParserConfigurationException, SAXException, IOException
-    {
+    public static String getData(String nodeName) throws ParserConfigurationException, SAXException, IOException {
         File fXmlFile = new File("/Users/oshikzigler/Automation/SeleniumCourse/src/TestData.xml");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
