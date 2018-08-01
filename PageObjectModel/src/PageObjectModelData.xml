@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<environment>
+    <URL>http://atidcollege.co.il/Xamples/webdriveradvance.html</URL>
+    <Username>selenium</Username>
+    <Password>webdriver</Password>
+    <Occupation>Mobile QA</Occupation>
+    <Age>33</Age>
+    <Location>Tel Aviv</Location>
+    <ClickMe>"Click Me"</ClickMe>
+</environment>
