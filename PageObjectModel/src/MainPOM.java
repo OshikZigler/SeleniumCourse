@@ -45,27 +45,27 @@ public class MainPOM {
 
     @Test
     public void LoginTest() throws IOException, SAXException, ParserConfigurationException {
-        LoginPage.userName(driver).sendKeys(getData("Username"));
-        LoginPage.password(driver).sendKeys(getData("Password"));
-        LoginPage.submit(driver).click();
+        LoginPagePOM.userName(driver).sendKeys(getData("Username"));
+        LoginPagePOM.password(driver).sendKeys(getData("Password"));
+        LoginPagePOM.submit(driver).click();
     }
 
     @Test
     public void FormTest() throws IOException, SAXException, ParserConfigurationException {
-        FormPage.occupation(driver).sendKeys(getData("Occupation"));
-        FormPage.age(driver).sendKeys(getData("Age"));
-        FormPage.location(driver).sendKeys(getData("Location"));
-        FormPage.clickMe(driver).click();
+        FormPagePOM.occupation(driver).sendKeys(getData("Occupation"));
+        FormPagePOM.age(driver).sendKeys(getData("Age"));
+        FormPagePOM.location(driver).sendKeys(getData("Location"));
+        FormPagePOM.clickMe(driver).click();
     }
 
     @Test
     public void BrowserTest() {
         //Find out how to compare String with value from XML
 
-        BrowserPage.clickMe(driver).isEnabled();
+        BrowserPagePOM.clickMe(driver).isEnabled();
         String expectedButtonText = "Click Me!";
-        Assert.assertEquals("Button text doesn't match", BrowserPage.clickMe(driver).getText(), expectedButtonText);
-        BrowserPage.clickMe(driver).click();
+        Assert.assertEquals("Button text doesn't match", BrowserPagePOM.clickMe(driver).getText(), expectedButtonText);
+        BrowserPagePOM.clickMe(driver).click();
     }
 }
 
